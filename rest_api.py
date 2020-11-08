@@ -16,7 +16,8 @@ def get_address():
         postnum = request.args.get('postnum')
         logging.error("postnum = %s", postnum)
         cur.execute("SELECT * FROM address WHERE postnum = ?;", (postnum,))
-        add = cur.fetchall() 
+        add = cur.fetchall()
+        logging.warn("add = %s",add)
     except sqlite3.Error as e:
         abort(404)
 
