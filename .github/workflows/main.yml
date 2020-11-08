@@ -17,6 +17,6 @@ jobs:
     - name: Run AWS CodeDeploy
       run: aws deploy create-deployment --application-name "Python_Api" --deployment-group-name "Python_Api" --github-location repository="rocorock/api_practice",commitId="${{ github.sha }}"
       env:
-        AWS_ACCESS_KEY_ID: ${{AKIATQBI3I6DJUBJGW5T}}
-        AWS_SECRET_ACCESS_KEY: ${{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}}
+        AWS_ACCESS_KEY_ID: ${{AWS_ACCESS_KEY_ID}}
+        AWS_SECRET_ACCESS_KEY: ${{AWS_SECRET_ACCESS_KEY}}
 
