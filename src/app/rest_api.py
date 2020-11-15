@@ -4,10 +4,10 @@ from flask import Flask, jsonify, abort, make_response, request
 import sqlite3
 import logging
 
+
 api = Flask(__name__)
 
 @api.route('/search', methods=['GET'])
-
 def get_adress_by_zipcode():
     try:
         filepath = "../../Database/Address.sqlite"
@@ -16,16 +16,19 @@ def get_adress_by_zipcode():
         zipcode = request.args.get('zipcode')
         logging.error("zipcode = %s", zipcode)
         cur.execute("SELECT * FROM Address WHERE zipcode = ?;", (zipcode,))
+
         add = cur.fetchall()
+        logging.error("add[0] = %s", add[0])
         if not add:
             raise ValueError("valueError")          
         result = {
             "result":True,
-            "data":{
-                "id": add[0],
-              #  "zipcode" add[1],
-               # "zipcode": add[2]
-                }
+            "data":add
+            # "data":{
+            #     "id": add[0],
+            #   #  "zipcode" add[1],
+            #    # "zipcode": add[2]
+            #     }
             }
         logging.error("ListError = %s", add) 
     except sqlite3.Error as e:
@@ -35,6 +38,36 @@ def get_adress_by_zipcode():
         abort(400)
     
     return make_response(jsonify(result))
+
+@api.route('/address', methods=['POST'])
+def post_address():
+    try:
+        filepath = "../../Database/Address.sqlite"
+        conn = sqlite3.connect(filepath)
+        cur = conn.cursor()
+        logging.error("ListError = %s", cur) 
+        sql = "insert into Address (id, zipcode, prefecture) values (?,?,?)"
+        address = (5, '500-000', 'Gunma')
+        cur.execute(sql, address)
+        conn.commit()
+
+        zipcode = 5
+        cur.execute("SELECT * FROM Address WHERE zipcode = ?;", (zipcode,))
+        add = cur.fetchall()
+        logging.error("ListError = %s", add) 
+        result = {
+            "result":True,
+            "data":add[0]
+            # "data":{
+            #     "id": add[0],
+            #   #  "zipcode" add[1],
+            #    # "zipcode": add[2]
+            #     }
+            }
+    except sqlite3.Error as e:
+        abort(500)
+    return make_response(jsonify(result))
+
 
 
 @api.errorhandler(400)

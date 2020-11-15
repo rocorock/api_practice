@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 
-filepath = "../../Database/Address.sqlite"
-conn = sqlite3.connect(filepath)
+FILEPATH = "../../Database/Address.sqlite"
+conn = sqlite3.connect(FILEPATH)
 
 cur = conn.cursor()
 cur.execute("DROP TABLE IF EXISTS Address")
