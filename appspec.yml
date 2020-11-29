@@ -4,6 +4,9 @@ files:
   - source: /
     destination: /home/ec2-user/
 hooks:
+BeforeInstall:
+  - location: Scripts/StopApp.sh
+    runas: root
 AfterInstall:
   - location: Scripts/Server_start.sh
     runas: root
