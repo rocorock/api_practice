@@ -3,3 +3,7 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/
+hooks:
+  - AfterInstall:
+     - location: Scripts/Server_start.sh
+       timeout: 180
