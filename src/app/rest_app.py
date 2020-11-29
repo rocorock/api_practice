@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 
-filepath = "../../Database/Address.sqlite"
+filepath = "/home/ec2-user/Database/Address.sqlite"
 conn = sqlite3.connect(filepath)
 
 cur = conn.cursor()
@@ -14,7 +14,7 @@ cur.execute("""CREATE TABLE Address(
     )""")
 conn.commit()
 
-for line in open("../assets/address.csv", "r"):
+for line in open("/home/ec2-user/src/assets/address.csv", "r"):
     input_data = tuple(line[:-1].split(","))
     cur.execute(
             "INSERT INTO address (id, zipcode, prefecture) VALUES (?, ?, ?)",input_data)
