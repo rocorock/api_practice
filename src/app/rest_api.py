@@ -10,7 +10,7 @@ api = Flask(__name__)
 
 def get_adress_by_zipcode():
     try:
-        filepath = "../../Database/Address.sqlite"
+        filepath = "/home/ec2-user/Database/Address.sqlite"
         conn = sqlite3.connect(filepath)
         cur = conn.cursor()
         zipcode = request.args.get('zipcode')
