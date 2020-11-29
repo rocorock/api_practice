@@ -5,9 +5,7 @@ filepath = "/home/ec2-user/Database/Address.sqlite"
 conn = sqlite3.connect(filepath)
 
 cur = conn.cursor()
-cur.execute(
-    
-)
+cur.execute("DROP TABLE IF EXISTS Address")
 
 cur.execute("""CREATE TABLE Address(
         id INTEGER PRIMARY KEY,
