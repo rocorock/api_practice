@@ -6,4 +6,4 @@ files:
 hooks:
 AfterInstall:
   - location: Scripts/Server_start.sh
-    timeout: 180
+    runas: root
